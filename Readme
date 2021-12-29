@@ -1,1 +1,35 @@
-This script finds Active Directory group membership of an user using the email id. Large organizations use multiple Proxy PAC files based on user location/ department etc. These PAC files are pushed to user machines using Active Directory group policies based upon AD group membership of the user. Although proxy PAC settings can be obtained from the user, many organizations do not encourage contacting business users unless it's absolutely necessary. This script/ tool can help Network/ Security engineers to find the AD group membership of an user in order to figure out the proxy PAC in force for an user.
+This script fetches & lists the Active Directory groups of an user when the email id entered. 
+
+Large organisations may use resource access policy based on AD group membership. This script is useful to identify the required & missing AD group membership, required  
+for specific resouce access. 
+
+Large organisations may use multiple Proxy PAC files based on user location/ department etc. These PAC files are pushed to user machines using Active Directory group policies based upon AD group membership of the user. Although proxy PAC settings can be obtained 
+from the user, many organizations do not encourage contacting business users unless it's absolutely necessary. This script/ tool can help Network/ Security engineers to 
+find the AD group membership of an user in order to figure out the proxy PAC in force for an user.
+
+This helps to identify the internet proxy the user is on & also the privileged AD group membership which might be required/ missing for AD group based policies.
+
+Sample output below -
+
+***************************
+
+29 December 2021 17:25:20
+
+
+***************************
+AD ID:
+
+csanj
+
+
+AD Groups:
+
+name                                    
+----                                    
+            
+ElevatedUser            
+FirefoxUsers            
+ProxyConfigE               
+InternetAccess                
+Domain Users                            
+    
