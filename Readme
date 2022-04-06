@@ -1,7 +1,6 @@
 This script fetches & lists the Active Directory groups of an user when the email id entered. 
 
-Large organisations may use resource access policy based on AD group membership. This script is useful to identify the required & missing AD group membership, required  
-for specific resouce access. 
+Large organisations may use resource access policy based on AD group membership. This script is useful to identify the required & missing AD group membership, required to access specific resouce. 
 
 Large organisations may use multiple Proxy PAC files based on user location/ department etc. These PAC files are pushed to user machines using Active Directory group policies based upon AD group membership of the user. Although proxy PAC settings can be obtained 
 from the user, many organizations do not encourage contacting business users unless it's absolutely necessary. This script/ tool can help Network/ Security engineers to 
