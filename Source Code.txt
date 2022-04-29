@@ -1,0 +1,43 @@
+echo "**********************************************************************************************************"
+echo "* Purpose:                                                                                               *"
+echo "*    This script fetches & lists the Active Directory groups of an user when the email id entered.       *"
+echo "*    This is useful to identify required/ missing AD groups to access a resource restricted by AD group. *"
+echo "*                                                                                                        *"
+echo "* How to use:                                                                                            *"
+echo "*    Input the user email id when prompted & hit enter. Wildcard '*' may be used after entering part of  *"
+echo "*    the email id. When using '*',if no output is seen, enter few more characters while trying again.    *"
+echo "*    e.g. sanjib.ch*                                                                                     *"
+echo "*                                                                                                        *"
+echo "*    A file out.txt will get generated. Read carefully the message displayed in the output file.         *"
+echo "*                                                                                                        *"
+echo "* Disclaimer:                                                                                            *"
+echo "*    There is no guarantee/ warranty that it will work as intended, though it worked fine during testing.*" 
+echo "*    Use at your own risk -:). Report bug to sanjib_25@yahoo.com                                         *"
+echo "*    Visit https://github.com/Sanjib-Chowdhury for more tools.                                           *"
+echo "**********************************************************************************************************"
+echo ""
+Import-Module -Name ActiveDirectory
+$email = Read-Host 'Input the user email id & hit enter'
+$ADgrp = Read-Host 'Input the full/ partial name of the Active Directory group & hit enter. Just hit Enter to list all Groups'
+$racf = Get-ADUser -Filter {mail -like $email} | select name | Format-Table -HideTableHeaders
+$racfin = @{
+Identity = ($racf | Out-String).Trim()
+}
+echo "***************************" > out.txt
+date >> out.txt
+echo "***************************" >> out.txt
+echo "Email Id: ($email)" >> out.txt
+echo "AD group searched for: ($ADgrp)" >> out.txt
+echo "AD ID:" $($racf) >> out.txt
+echo "AD Groups the user is member of:" >> out.txt
+if (-not ([string]::IsNullOrEmpty($ADgrp))){
+Get-ADPrincipalGroupMembership @racfin | select name | sort name | Select-String -pattern "$ADgrp" >> out.txt
+}else{
+Get-ADPrincipalGroupMembership @racfin | select name | sort name >> out.txt
+}
+
+echo "**********************************************************" >> out.txt
+echo "Report bugs to sanjib_25@yahoo.com" >> out.txt
+echo "Visit https://github.com/Sanjib-Chowdhury for more tools." >> out.txt
+
+Notepad out.txt
